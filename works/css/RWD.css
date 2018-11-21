@@ -1,0 +1,273 @@
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+
+  .info table td {
+    font-size: 16px;
+  }
+
+  .avatar {
+    position: relative;
+    right: 75px;
+    margin: 0 auto;
+  }
+
+  .full-bg {
+      width: 100%;
+      height: 100%;
+      background-size: 100% auto;
+      background-position: 50% 50%;
+
+    }
+
+    .mobile.info {
+      display: inline;
+      padding-left: 15px;
+      color: #fff;
+      font-size: 20px;
+      line-height: 48px;
+
+    }
+
+    #myNavbar {
+      background-color: #333;
+      z-index: 10;
+    }
+
+    .navbar-scroll.navbar-fixed-top {
+      padding: 10px 0;
+
+    }
+
+    .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+      background-color: none;
+    }
+
+    .navbar-inverse .navbar-toggle {
+      border: none;
+    }
+
+    .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+      border: none;
+    }
+
+    #header .collapse.navbar-collapse {
+      padding: 0 15px;
+    }
+
+}
+
+@media (max-width: 425px) {
+
+  #content>div {
+    margin-bottom: 40px;
+  }
+
+  .container {
+    max-width: 380px;
+  }
+  
+  .heading h2 {
+    font-size: 28px;
+  }
+
+  .heading-black h2 {
+    font-size: 28px;
+  }
+
+  .shorttitle span {
+    font-size: 18px;
+  }
+
+/* header */
+
+  .full-bg {
+    width: 100%;
+    height: 100%;
+    background-size: 100% auto;
+    background-position: 50% 50%;
+
+  }
+
+  .mobile.info {
+    display: inline;
+    padding-left: 15px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 48px;
+
+  }
+
+  #myNavbar {
+    background-color: #333;
+    z-index: 10;
+  }
+
+  .navbar-scroll.navbar-fixed-top {
+    padding: 10px 0;
+
+  }
+
+  .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: none;
+  }
+
+  .navbar-inverse .navbar-toggle {
+    border: none;
+  }
+
+  .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border: none;
+  }
+
+  #header .collapse.navbar-collapse {
+    padding: 0 15px;
+  }
+
+/* myinfo */
+
+  .infos h3 {
+    font-size: 16px;
+  }
+
+  .infos table {
+    font-size: 18px;
+
+  }
+  
+  .infos table tr:nth-child(2), .infos table tr:nth-child(3) {
+    display: none;
+  }
+
+  .avatar {
+    width: 80%;
+    height: 80%;
+    transform: translate(25%, 0);
+  }
+
+  /* about */
+  
+  #about .col-sm-6 {
+    height: 100%;
+  }
+
+  #about .col-sm-6:first-child {
+    display: none;
+  }
+
+  #aboutCarousel {
+    padding: 40px;
+  }
+
+  .carousel-inner {
+    height: 320px;
+    text-align: center;
+  }
+
+  .carousel-inner .item:first-child p {
+    text-align: left;
+
+  }
+
+  .description h3 {
+    font-size: 30px;
+  }
+
+  .description h3 i {
+    font-size: 14px;
+  }
+
+  .description p {
+    padding: 0;
+    font-size: 16px;
+  }
+
+/* skills  */
+  .full-bgc {
+    padding-bottom: 0;
+  }
+
+/* my experience */
+  
+  #experience >.container {
+    padding: 50px 0;
+  }
+
+  body #experience {
+    margin-bottom: 0;
+  }
+  
+  #experience .col-sm-6:first-child {
+    display: none;
+  }
+
+  #experience .col-sm-6 {
+    padding: 0;
+  }
+  
+  #experience .col-sm-6.company {
+    border: none;
+
+  }
+
+  #experience .col-sm-6 span {
+    display: none;
+  }
+
+  #experience .col-sm-6 .desp {
+    padding-top: 80px;
+    margin-right: 29px;
+    
+  }
+
+  #experience .col-sm-6.year {
+    padding: 0;
+    right: 39% ;
+    bottom: 300px
+  }
+
+  #experience .col-sm-6.year:nth-child(5), #experience .col-sm-6.year:nth-child(7) {
+    bottom: 270px
+  }
+
+  #experience .col-sm-6.year button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+
+
+  /* contact-me */
+
+  #contact-me .col-sm-6.dest-top {
+    display: none;
+  }
+  #contact-me .col-sm-6.mobile {
+    padding: 0;
+    display: block;
+    border-bottom: none;
+  }
+
+  #contact-me .col-sm-6.mobile .col-sm-6 {
+    padding: 0;
+  }
+
+  #contact-me .col-sm-6.mobile .col-sm-6:last-child {
+    border-top: none;
+  }
+  
+  .contact p {
+    margin-bottom: 30px;
+  }
+
+
+
+}

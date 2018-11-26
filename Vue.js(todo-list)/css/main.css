@@ -1,0 +1,73 @@
+* {
+	font-size: 20px;
+}
+
+ul a {
+	color:#000;
+	
+}
+
+ul a:hover {
+	text-decoration: none;
+}
+
+
+#app {
+	margin-top: 100px;
+}
+
+.add-todo input[type="text"] {
+	width: 80%;
+	padding: 10px;
+
+}
+
+.add-todo button {
+	padding: 12px;
+	border: none;
+
+}
+
+.add-todo button:first-child {
+	font-weight: bold;
+	position: relative;
+	left: 4px;
+
+}
+
+.add-todo button:nth-child(3) {
+	color: #fff;
+	background-color: #007aff;
+}
+
+.add-todo{
+	
+	margin-bottom: 20px;
+}
+
+
+#all-list {
+	border: 1px solid #ccc;
+}
+
+.nav-item a {
+	color: #007aff;
+}
+.card-footer {
+	position: relative;
+	border-top: 1px solid #ccc;
+	padding: 30px 10px;
+}
+
+.card-footer a {
+	position: absolute;
+	right: 30px	;
+}
+
+button.close span {
+	font-size: 30px;
+}
+
+.completed {
+	text-decoration: line-through;
+}

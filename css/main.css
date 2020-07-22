@@ -12,9 +12,6 @@
   margin: 0 auto;
 }
 
-
-
-
 h1, h2, h3, h4, h5 {
   margin: 0;
 }
@@ -29,8 +26,6 @@ img {
 hr {
   margin: 30px 0;
 }
-
-
 
 #content>div {
   margin-bottom: 80px;
@@ -90,82 +85,78 @@ ul.nav.navbar-nav {
   background-position-y: 100%;
   background-attachment: fixed; 
 }
-
 .mobile.info {
   display: none;
 }
-
-
 /* basic-info  */
-
 .infos {
   width: 100%;
-  padding: 100px 40px 40px 40px;
+  padding: 40px;
   background-color: rgba(33,41,51,.6);
 }
-
-.info h3 {
-  margin: 0;
-  color: #c7c7c7;
-}
-
-.shorttitle {
-  position: relative;
-  top: -20px;
-}
-
-.shorttitle span {
-  
+.intro span {
   background-color: #00a68d;
-  padding: 10px 30px;
-  font-size: 25px;
+  padding: 5px 20px;
+  font-size: 24px;
   color: #fff;
-  text-transform: capitalize;
+  text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: bold;
-}
-
-.triangle {
   position: relative;
-  left: 15px;
-  top: 4px;
-  width: 0;
-  height: 0;
+  display: inline-block;
+  margin-bottom: 10px;
+
+}
+.intro span:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate3d(-50%,100%,0);
   border-style: solid;
-  border-width: 10px 5px 0 5px;
+  border-width: 14px 7px 0 7px;
   border-color: #00a68d transparent transparent transparent;
 }
-
-.info table {
-  font-size: 20px;
+.intro h3 {
+  margin: 0;
+  color: #c7c7c7;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+.my-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
   color: #fff;
-
 }
-
-.info table th {
-  padding-bottom: 40px;
+.name {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
 }
-
-.info table td {
-  padding-bottom: 40px;
-  padding-left: 40px;
-  font-weight: 100;
+.name span {
+  font-weight: bold;
+  color: #fff;
 }
-
-.info table a {
+.name span:first-child {
+  margin-right: 10px;
+  font-weight: normal;
+}
+.works span:first-child {
+  margin-right: 10px;
+  font-weight: normal;
+}
+.works a {
   color: #fff;
   text-decoration: none;
-
 }
-
-.info table a:hover {
-  color: rgb(0,166,144);
-
+.works a:hover {
+  color: #00a68d;
 }
-
 .avatar {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
 }
 
 /* about */ 

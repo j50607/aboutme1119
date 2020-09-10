@@ -1,0 +1,41 @@
+
+.container {
+	margin: 0 auto;
+	padding: 30px;
+	
+}
+table {
+	margin-bottom: 20px;
+}
+
+table.preoption {
+	border: 1px solid #ccc;
+	width: 600px;
+}
+
+
+input[type="text"] {
+	font-size: 16px;
+}
+
+table.preoption td {
+	background-color: #edf2f1;
+	color: #000;
+}
+
+table th {
+	background-color: #42588f;
+	color: #fff;
+}
+
+table.income td {
+	margin-right: 10px;
+}
+
+table.notax td:first-child {
+	width: 150px;
+}
+
+.noColor {
+	color: #fff;
+}

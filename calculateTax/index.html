@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Language" content="zh-TW">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>綜合所得稅試算</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<!--[if lt IE 9]>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	<script src="https://stackpath.bootstrapcdny6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	
+	<link rel="stylesheet" href="style.css">
+
+	<style>
+
+	</style>
+</head>
+
+<body>
+
+	<div id="content">
+		<div id="app">
+			<div class="container">
+				<h2>綜合所得稅試算</h2>
+				<hr>
+					<!-- 提醒 -->
+					<div class="col-xs-12 col-sm-12 desc">
+						<div class="row">
+							<p>本程式僅提供簡易稅額試算，實際納稅額請依國稅局為準。</p>	
+						</div>
+					</div>
+
+					<form action="" class="form-horizontal">
+					<!-- 申報方式 -->
+					<div class="col-xs-12 col-sm-12">
+					<div class="row">
+						<h3>申報方式</h3>
+						<p>本試算服務對於有配偶者，僅提供夫妻各類所得合併計算之單一方式之試算。</p>
+					</div>
+					</div>
+
+					<div class="col-xs-12 col-sm-12 all row-same-height">
+
+						<div class="col-xs-12 col-sm-4 left">
+							<div class="text">
+								預計採用的申報方式為：
+							</div>
+						</div>
+
+						<div class="col-xs-12  col-sm-6 right">
+							<div class="form-group">
+								<div class="col-xs-10 form__identity">
+									<select class="form-control" name="" id="" v-model="select">
+										<option value="個人申報">個人申報</option>
+										<option value="夫妻合併">夫妻合併</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					<div class="spacing-small"></div>
+			        </div>
+
+					<!-- 一、綜合所得總額 -->
+					<div class="col-xs-12 col-sm-12">
+					<div class="row">
+						<h3>一、綜合所得總額</h3>
+				    </div>
+					</div>
+					
+					<div class="col-xs-12 col-sm-12 all row-same-height">
+							<div class="col-xs-12 col-sm-4 left">
+							<div class="text">
+								107年度薪資總額
+							</div>
+						</div>
+
+						<div class="col-xs-12  col-sm-6 right">
+								<div class="form-group">
+									<label class="form__label">本人薪資：</label>
+									<div class="form__money">
+										<input class="form-control" type="text" v-model.number="income" placeholder="0"
+											id="input1">
+									</div>
+									<div class="form__txt">元</div>
+								</div>
+
+								<div class="form-group">
+									<label class="form__label">配偶薪資：</label>
+									<div class="form__money">
+										<input class="form-control" type="text" v-model.number="incomes" :placeholder="this.defautl" :disabled="select == '個人申報'" id="input2">
+									</div>
+									<div class="form__txt">元</div>
+								</div>
+
+								<div class="form-group">
+									<label class="form__label">扶養親屬：</label>
+									<div class="form__money">
+										<input class="form-control" type="text" v-model.number="parents" placeholder="扶養對象無收入免填" id="input3">									</div>
+									<div class="form__txt">元</div>
+								</div>
+						</div>
+					<div class="spacing-small"></div>	
+					</div>
+
+					<!-- 二、免稅額 -->
+					<div class="col-xs-12 col-sm-12">
+						<div class="row">
+							<h3>二、免稅額</h3>
+							<p>請依年齡分別填寫您本次申報稅務人口數。（包含您、合併申報之配偶、扶養親屬。）</p>
+						</div>
+					</div>
+					<!-- 1、未滿70歲 -->
+					<div class="col-xs-12 col-sm-12 all row-same-height" style="margin-bottom:0px;border: none;">   
+						<div class="col-xs-12 left">
+							<div class="text">
+								未滿七十歲
+							</div>
+						</div>
+					
+						<div class="col-xs-12 right">
+							<div class="form-group">
+								<!-- <label class="form__label">A.本人薪資：</label> -->
+								<div class="form__people">
+									<input class="form-control" type="text" v-model.number="down70" id="input4">
+								</div>
+								<div class="form__txt">人</div>
+								<!-- <div class="form__note">（包含本人及配偶）</div> -->
+							</div>
+						</div>
+					</div>
+
+					<!-- 2、70歲以上 -->
+					<div class="col-xs-12 col-sm-12 all row-same-height">
+						<div class="col-xs-12 left">
+							<div class="text">
+								七十歲以上
+							</div>
+						</div>
+						<div class="col-xs-12 right">
+							<div class="form-group">
+								<!-- <label class="form__label">A.本人薪資：</label> -->
+								<div class="form__people">
+									<input class="form-control" type="text" v-model.number="up70" id="input5">
+								</div>
+								<div class="form__txt">人</div>
+								<!-- <div class="form__note">（限本人、配偶及受扶養直系尊親屬）</div> -->
+							</div>
+						</div>
+					<div class="spacing-small"></div>		
+					</div>
+
+					<!-- 三、扣除額 -->
+					<div class="col-xs-12 col-sm-12">
+						<div class="row">
+						<h3>三、扣除額</h3>
+					    </div>
+					</div>
+					<!-- 1、一般扣除額	-->
+					<div class="col-xs-12 col-sm-12 all row-same-height" style="margin-bottom:0px;border: none;"> 
+						<div class="col-xs-12 left">
+							<div class="text">
+								一般扣除額
+							</div>
+						</div>
+					
+						<div class="col-xs-12 right">
+							<div class="form-group">
+								<div class="form__txt2">
+								<input type="radio" class="custom-control-input" id="defaultUnchecked" v-model="singleRadio" value="標準扣除額" >
+								<label class="form__label2" for="defaultUnchecked">標準扣除額：</label>
+								<!-- <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+								<label class="custom-control-label" for="defaultUnchecked">Default unchecked</label> -->
+								<!-- class="checkinput" -->
+                                </div>
+								<div class="form__money">
+										<input class="form-control input-style" type="text" v-model="normalSubtract" placeholder="自動計算免填" :disabled="singleRadio == '列舉扣除額'">
+									</div>
+								<div class="form__txt">元</div>
+								<!-- <div class="form__note">（本欄金額自動計算免填寫）</div> -->
+							</div>
+					
+							<div class="form-group">
+								<div class="form__txt2">
+									<input type="radio" class="custom-control-input" id="defaultChecked"  v-model="singleRadio" value="列舉扣除額">
+									<!-- class="checkinput" -->
+									<label class="form__label2"  for="defaultChecked">列舉扣除額：</label>
+									<!-- <input type="radio" class="custom-control-input" id="defaultChecked" name="defaultExampleRadios" checked> -->
+									<!-- <label class="custom-control-label" for="defaultChecked">Default checked</label> -->
+								</div>
+								<div class="form__money">
+										<input class="form-control" type="text" v-model.number="exampleSubtract" placeholder="選用標準扣除額免填" :disabled="singleRadio == '標準扣除額'" id="input2">
+									</div>
+								<div class="form__txt">元</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 2、薪資所得特別扣除額 -->
+					<div class="col-xs-12 col-sm-12 all row-same-height" style="margin-bottom:0px;"> 
+							<div class="col-xs-12 left">
+								<div class="text">
+									薪資所得特別扣除額
+								</div>
+							</div>
+					
+							<div class="col-xs-12 right">
+								<div class="form-group">
+									<div class="form__money">
+											<input class="form-control" type="text" v-model="defaultText3" placeholder="自動計算免填" disabled="">
+										</div>
+									<div class="form__txt">元</div>
+									<!-- <div class="form__note">（本欄金額自動計算免填寫）</div> -->
+								</div>
+							</div>
+					<div class="spacing-small"></div>			
+					</div>
+					<div class="spacing-small"></div>	
+
+					<!-- 3、身心障礙特別扣除額 -->
+					<div class="col-xs-12 col-sm-12 all row-same-height" style="margin-bottom:0px;border: none;">
+							<div class="col-xs-12 left">
+								<div class="text">
+									身心障礙特別扣除額
+								</div>
+							</div>
+					
+							<div class="col-xs-12 right">
+								<div class="form-group">
+									<div class="form__people">
+									<input class="form-control input-style" type="text" v-model.number="pmdisorder" id="input7">									
+									</div>
+									<div class="form__txt">人</div>
+									<div class="form__money">
+											<input class="form-control input-style" type="text" v-model="defaultText" placeholder="自動計算免填" disabled="">
+										</div>
+									<div class="form__txt">元</div>
+									<!-- <div class="form__note">（本欄金額自動計算免填寫）</div> -->
+								</div>
+							</div>
+					</div>
+
+					<!-- 4、教育學費特別扣除額 -->
+					<div class="col-xs-12 col-sm-12 all row-same-height" style="margin-bottom:0px;border: none;">
+							<div class="col-xs-12 left">
+								<div class="text">
+									教育學費特別扣除額
+								</div>
+							</div>
+					
+							<div class="col-xs-12 right">
+								<div class="form-group">
+									<div class="form__people">
+									<input class="form-control input-style" type="text" v-model.number="education" id="input8">
+									</div>
+									<div class="form__txt">人</div>
+									<div class="form__money">
+											<input class="form-control input-style" type="text" v-model="defaultText1" id="input9" placeholder="自動計算免填" disabled="">
+										</div>
+									<div class="form__txt">元</div>
+									<!-- <div class="form__note">（每名子女每年之扣除金額以25,000為限）</div> -->
+								</div>
+							</div>
+					</div>
+
+					<!-- 5、幼兒學前特別扣除額 -->
+					<div class="col-xs-12 col-sm-12 all row-same-height" style="margin-bottom:0px;">
+							<div class="col-xs-12 left">
+								<div class="text">
+									幼兒學前特別扣除額
+								</div>
+							</div>
+					
+							<div class="col-xs-12 right">
+								<div class="form-group">
+									<div class="form__people">
+										<input class="form-control input-style" type="text" v-model.number="child" id="input9">
+									</div>
+									<div class="form__txt">人</div>
+									<div class="form__money">
+											<input class="form-control input-style" type="text" v-model="defaultText2" placeholder="自動計算免填" disabled="">
+										</div>
+									<div class="form__txt">元</div>
+									<!-- <div class="form__note">（每名子女每年之扣除金額以120,000為限）</div> -->
+								</div>
+							</div>
+					</div>
+
+					<!-- 按鈕 -->
+					<div class="col-xs-12 col-sm-8 col-sm-offset-2 finalbutton">
+						<div class="row">
+							<div class="form-group" style="border: none;">
+								<div class="col-xs-6 col-sm-6">
+									<button @click="reCalculate" type="button"
+										class="btn btn-info btn-lg btn-block info" id="reset">
+										<a href="#app" style="color: #FFF;text-decoration: none;" id="reset">重新計算</a></button>
+								</div>
+								<div class="col-xs-6 col-sm-6">
+									<button @click="calculated" value="計算稅額" type="button"
+										class="btn btn-danger btn-lg btn-block info" id="sumbit">
+										<a href="#taxresult" style="color: #FFF;text-decoration: none;" id="sumbit">計算稅額</a></button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 您107年度綜合所得稅額為 -->
+					<div class="col-xs-12 col-sm-8 col-sm-offset-2 taxresult text-center">
+						<h3>您107年度綜合所得稅額為</h3>
+					<div class="taxresult__money">
+							<input type="text2" v-model="formatPrice(finalResult)" :class="{'noColor': isShow}"> 
+							<span class="taxresult__txt">元</span>
+					</div>
+					</div>
+
+					<!-- 提醒 -->
+					<div class="col-xs-12 col-sm-12 desc">
+						<div class="row">
+							<p>本程式僅提供簡易稅額試算，實際納稅額請依國稅局為準。</p>	
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- calculateTax -->
+	<script src="calculateTax.js?7"></script>
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<!-- bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- iframeAutoHeight -->
+	<script src="https://money.udn.com/SSI/js/iframeAutoHeight.js"></script> 
+	<script>
+		var url = "https://money.udn.com/SSI/iframe_agent.html";
+		initAgent(url);
+		setInterval("callAgent(url)", 1500);
+	</script>
+		
+	<!-- 按鈕移動 -->
+	<script>
+			$(function () {
+		//如果是iframe则需要在网络中访问，因为js里有域限制 
+		//如果没有iframe则不进行处理， 
+				if (window !== window.top) {
+		//获取top窗口中的iframe，如果有iframe嵌套过多，请自行修改 
+					var iframeList = window.top.document.getElementsByTagName('frame_content');
+					for (var i = 0; i < iframeList.length; i++) {
+		//判断当前窗口是否循环中的iframe 
+						if (window.location.toString().indexOf(iframeList[i].getAttribute('src').toString()) != -1) {
+		//等自己的所在iframe加载完成给a锚点加事件 
+							window.top.document.getElementsByTagName('frame_content')[i].onload = function () {
+		//确定iframe在父窗体的距顶部距离 
+								var top = window.top.document.getElementsByTagName('frame_content')[i].offsetTop;
+								$('a').each(function () {
+									var href = $(this).attr('href');
+									if (href.indexOf('#') != -1) {//判断是否是锚点而不是链接 
+										var name = href.substring(href.indexOf('#') + 1);
+										$(this).bind('click', function () {
+											$('a').each(function () {
+												if ($(this).attr('name') == name) {
+		//父窗口滚动 
+													$(window.parent).scrollTop($(this).offset().top + top);
+												}
+
+											});
+										});
+									}
+								});
+							}
+						}
+					}
+				}
+			});
+	</script>
+	<script>
+
+		$("#reset").on("click", function () {
+			$('html, body').animate({
+			scrollTop: $("#app").offset().top 
+			}, 1000);
+		});
+
+		$("#sumbit").on("click", function () {
+			$('html, body').animate({
+			scrollTop: $(".taxresult ").offset().top 
+			}, 1000);
+		});
+
+	</script>
+
+</body>
+</html>

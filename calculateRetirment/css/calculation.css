@@ -1,0 +1,899 @@
+@charset "utf-8";
+
+	body {
+		font-family: Arial, Helvetica, "STHeitiTC-Light", "Microsoft JhengHei", "微軟正黑體", "Noto Sans TC", sans-serif;
+		font-size: 18px;
+		line-height: 0.5;
+		background-color: #ffffff;
+		color: #3e3a39;
+		overflow-x: hidden;
+		text-align: justify;
+		word-wrap: break-word;
+		margin: 0;
+		padding: 0;
+		height: 100%;
+	}
+
+	/* FontAwesome */
+	@font-face {
+		font-family: "FontAwesome";
+		font-weight: normal;
+		font-style: normal;
+		src: url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0");
+		src: url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"),
+			url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"),
+			url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"),
+			url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype"),
+			url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+	}
+
+	textarea:focus, input:focus{
+		outline: none;
+	}
+
+
+/* CSS Document */
+
+      /* 表單動畫 */
+
+      /* 
+      transition: property duration timing-function delay;
+      transition-property
+      用來定義可以產生 transition 屬性效果的屬性名稱，例如寬度、背景顏色 ...。
+      transition-duration
+      用來定義 transition 屬性發生的時間，單位為秒。
+      transition-timing-function
+      用來定義 transition 效果的發生速度，可說是設定轉場時所依據的貝茲曲線。
+      transition-delay
+      用來定義多久之後開始發生 transition 效果。
+		*/
+		
+			/* 
+		animation: name duration timing-function delay iteration-count direction fill-mode;
+		animation-name	設定 @keyframes at-rule 所使用的動畫名稱。
+		animation-duration	設定整個動畫播放一次的時間長度。
+		animation-timing-function	透過加速曲線（acceleration curves），設定動畫播放的速度。
+		animation-delay	設定網頁元素在被載入之後到開始播放動畫之間的等待時間。
+		animation-iteration-count	設定動畫播放的次數，若要不斷重複播放，則可設為 infinite。
+		animation-direction	設定網頁元素在動畫播放完之後，是否要以相反方向的方式播放，或是從頭開始以原來的方向重複播放。
+		animation-fill-mode 設定動畫元素在播放前與播放後，如何套用 CSS 的樣式。
+		animation-play-state	這個屬性可用來暫停或繼續動畫播放。
+		  */
+		  .show {
+			display: block !important;
+		}
+
+	/* 試算表延遲出現 */
+
+		#trial_form {
+			opacity: 0;
+
+		}
+		#note_btn {
+			outline: none;
+		}
+	/* 手機 */
+	@media screen and (max-width: 767px) {
+		.calculation__show {
+			opacity: 0;
+			margin-top: 30px;
+			animation: calculation__show .5s ease-in-out 1.5s 1 forwards;
+		}
+	}
+
+	
+	/* 桌機 */
+	@media screen and (min-width: 768px) {
+		.calculation__show {
+			opacity: 0;
+			animation: calculation__show .5s ease-in-out 1.5s 1 forwards;
+		}
+	}
+
+
+
+		@keyframes calculation__show {
+			0%{
+				opacity: 0;
+			}
+	
+			100%{
+				opacity: 1;
+			}
+		}
+	
+
+	/* 手機 */
+	@media screen and (max-width: 767px) {
+
+		.sset {
+			position: relative;
+		}
+	  
+
+		.calculation-set {
+			width: 90%;
+			height: 175px;
+			position: relative;
+			/* background-color: #888; */
+			overflow: hidden;
+			margin-bottom: 50px;
+			margin: 0 auto;
+		}
+		
+		.calculation-set-go {
+			/* width: 100%; */
+			/* height: auto; */
+			/* position: relative; */
+			/* background-color: #888; */
+			/* overflow: hidden; */
+			/* margin-bottom: 50px; */
+			animation: txogo 1s ease-in-out 1s;
+			/* animation: txogo 5s ease-in-out 10s 1 forwards; */
+		}
+		
+		
+		.set-title {
+			width: 100%;
+			height: auto;
+			position: absolute;
+			top:0;
+			margin-bottom: 25px;
+			opacity: 0;
+		}
+		
+		.set-title-go {
+			width: 100%;
+			animation: madgo-m 1.5s ease-in-out .5s 1 forwards;
+		}
+		
+		.set-tab {
+			width: 100%;
+			height: auto;
+			position: absolute;
+			bottom:0;
+			opacity: 0;
+			z-index: 999;
+		}
+		
+		.set-tab-go {
+			/* width: 100%;
+			height: auto; */
+			animation: jtgo 1s ease-in-out 0s 1 forwards;
+			/* position: absolute;
+			bottom:0; */
+		}
+		
+		.hand-set {
+			position: absolute;
+			width: 100%;
+			height: 210px;
+			top: -20%;
+			overflow: hidden;
+		}
+		
+		  .hand {
+			position: absolute;
+			top: 40px;
+			left: 5%;
+			width: 200px;
+			height: 170px;
+		}
+
+		.hand-go {
+			animation: handgo-m 1s ease-in-out 0s 1 forwards;
+		}
+
+	}
+
+	@keyframes madgo-m {
+		0% {	
+			top:-25px;			
+
+			opacity: 0;
+		}
+	
+		100% {
+			top:0px;			
+			opacity: 1;
+		}
+	}
+
+
+	@keyframes handgo-m {
+		from {
+			left: 0%;
+		}
+	
+	  to {
+		left: 70%;
+	  }
+	}
+
+		  
+	/*超寬螢幕*/
+	@media screen and (min-width: 768px) {
+
+		.sset {
+			position: relative;
+		}
+	  
+		.calculation-set {
+			width: 880px;
+			height: 450px;
+			position: relative;
+			overflow: hidden;
+			margin: 0 auto 50px auto;
+		}
+		
+		.calculation-set-go {
+			transition: txogo 1s ease-in-out 1s;
+		}
+		
+		@keyframes txogo {
+			from { top: 0;}
+			to {bottom: 0;}
+		}
+		
+		.set-title {
+			width: 100%;
+			height: auto;
+			position: absolute;
+			top:0;
+			margin-bottom: 25px;
+		}
+		
+		.set-title-go {
+			width: auto;
+			height: auto;
+			margin: 0 auto 50px auto;
+			animation: madgo 1s ease-in-out .1s 1 forwards;
+		}
+		
+		.set-tab {
+			width: 100%;
+			height: auto;
+			position: absolute;
+			bottom:0;
+			opacity: 0;
+			z-index: 999;
+		}
+		
+		.set-tab-go {
+			width: auto;
+			height: auto;
+			margin-bottom: 0px;
+			animation: jtgo 1s ease-in-out 0s 1 forwards;
+		}
+
+		.hand-set {
+			position: absolute;
+			width: 100%;
+			overflow: visible;
+		}
+		
+		.hand {
+			position: absolute;
+			top: 80px;
+			left: 15%;
+			z-index: 10;
+			width: 450px;
+		}
+		
+		.hand-go {
+			animation: handgo 1s ease-in-out 0s 1 forwards;
+		}
+
+
+	}	
+
+		@keyframes madgo {
+			0%{top:0%;}
+			25%{top:0%;}
+			50%{top:0%;}
+			75%{top:50%;}
+			100%{top:50%;}
+		}
+
+		@keyframes jtgo {
+			from {
+				clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+                opacity: 0;
+			}
+		
+			to {
+				clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+                opacity: 1;
+			}
+		}
+		
+
+	
+		@keyframes handgo {
+			from {
+				left: 0%;
+			}
+		
+		  to {
+			left: 65%;
+		  }
+		}
+		
+
+      /* 表單樣式 */
+
+	  /* radio btn 圖片化 */
+
+	/*手機*/
+	@media screen and (max-width: 767px) {
+
+		/* CUSTOM RADIO & CHECKBOXES
+			http://stackoverflow.com/a/17541916/383904 */
+			.rad,
+			.ckb {
+		  cursor: pointer;
+		  user-select: none;
+		  -webkit-user-select: none;
+		  -webkit-touch-callout: none;
+		}
+		.rad > input,
+		.ckb > input { /* HIDE ORG RADIO & CHECKBOX */
+		  position: absolute;
+		  opacity: 0;
+		  width: 0;
+		  height: 0;
+		}
+		/* RADIO & CHECKBOX STYLES */
+		/* DEFAULT <i> STYLE */
+		.rad > i,
+		.ckb > i{ 
+		  display: inline-block;
+		  vertical-align: middle;
+		  width:  18px;
+		  height: 18px;
+		  border-radius: 50%;
+		  transition: 0.2s;
+		  box-shadow: inset 0 0 0 8px #fff;
+		  border: 1px solid gray;
+		  /* background: gray; */
+		}
+		/* CHECKBOX OVERWRITE STYLES */
+		.ckb > i {
+		  width: 25px;
+		  border-radius: 3px;
+		}
+		.rad:hover > i{ /* HOVER <i> STYLE */
+		  box-shadow: inset 0 0 0 3px #fff;
+		  background: gray;
+		}
+		.rad > input:checked + i{ /* (RADIO CHECKED) <i> STYLE */
+		  box-shadow: inset 0 0 0 3px #fff;
+		  background: #3e3a39;
+		}
+		/* CHECKBOX */
+		.ckb > input + i:after{
+		  content: "";
+		  display: block;
+		  height: 12px;
+		  width:  12px;
+		  margin: 2px;
+		  border-radius: inherit;
+		  transition: inherit;
+		  background: gray;
+		}
+		.ckb > input:checked + i:after{ /* (RADIO CHECKED) <i> STYLE */
+		  margin-left: 11px;
+		  background:  orange;
+		}
+		
+		/* IMAGE STYLES */
+		[type=radio] + img {
+		  cursor: pointer;
+		}
+		
+		.rbtn {
+			height:1.5rem;
+		}
+		
+		.radiobtn {
+			cursor:pointer;
+			background-size:contain;
+			background-repeat:no-repeat;
+			display:inline-block;
+			-webkit-transition: all 100ms ease-in;
+				-moz-transition: all 100ms ease-in;
+					transition: all 100ms ease-in;
+			-webkit-filter: opacity(1);
+				-moz-filter: opacity(1);
+					filter: opacity(1);
+			margin-right: 15px;
+		}
+		.radiobtn:hover {
+			-webkit-filter: opacity(.7);
+				-moz-filter: opacity(.7);
+					filter: opacity(.7);
+		}
+	  }
+
+
+		  
+	/*超寬螢幕*/
+	@media screen and (min-width: 768px) {
+
+      /* CUSTOM RADIO & CHECKBOXES
+          http://stackoverflow.com/a/17541916/383904 */
+          .rad,
+          .ckb {
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+      }
+      .rad > input,
+      .ckb > input { /* HIDE ORG RADIO & CHECKBOX */
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      /* RADIO & CHECKBOX STYLES */
+      /* DEFAULT <i> STYLE */
+      .rad > i,
+      .ckb > i{ 
+        display: inline-block;
+        vertical-align: middle;
+        width:  27px;
+        height: 27px;
+        border-radius: 50%;
+        transition: 0.2s;
+        box-shadow: inset 0 0 0 8px #fff;
+        border: 1px solid gray;
+        /* background: gray; */
+      }
+      /* CHECKBOX OVERWRITE STYLES */
+      .ckb > i {
+        width: 25px;
+        border-radius: 3px;
+      }
+      .rad:hover > i{ /* HOVER <i> STYLE */
+        box-shadow: inset 0 0 0 3px #fff;
+        background: gray;
+      }
+      .rad > input:checked + i{ /* (RADIO CHECKED) <i> STYLE */
+        box-shadow: inset 0 0 0 3px #fff;
+        background: #3e3a39;
+      }
+      /* CHECKBOX */
+      .ckb > input + i:after{
+        content: "";
+        display: block;
+        height: 12px;
+        width:  12px;
+        margin: 2px;
+        border-radius: inherit;
+        transition: inherit;
+        background: gray;
+      }
+      .ckb > input:checked + i:after{ /* (RADIO CHECKED) <i> STYLE */
+        margin-left: 11px;
+        background:  orange;
+      }
+      
+      /* IMAGE STYLES */
+      [type=radio] + img {
+        cursor: pointer;
+      }
+      
+      .rbtn {
+          height:75px;
+      }
+      
+      .radiobtn {
+          cursor:pointer;
+          background-size:contain;
+          background-repeat:no-repeat;
+          display:inline-block;
+          -webkit-transition: all 100ms ease-in;
+              -moz-transition: all 100ms ease-in;
+                  transition: all 100ms ease-in;
+          -webkit-filter: opacity(1);
+              -moz-filter: opacity(1);
+                  filter: opacity(1);
+      }
+      .radiobtn:hover {
+          -webkit-filter: opacity(.7);
+              -moz-filter: opacity(.7);
+                  filter: opacity(.7);
+	  }
+	}
+
+      /* 表單 */
+
+	  
+		/*** 手機 ***/
+		@media screen and (max-width: 480px) {
+
+			input[type="text"] {
+				font-size: 18px;
+				/* padding-left: .5em; */
+				width: 100%;
+				text-align: right;
+                padding-right: .5em;
+			}
+
+			.all {
+				font-size: 18px;
+				overflow: hidden;
+				margin-bottom: 0px;
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+
+			.row-same-height {
+				display: table;
+				width: 100%;
+			}
+
+			.row-same-height [class^=col-] {
+				display: table-cell;
+				float: none;
+			}
+
+			.left {
+				/* background-color: #e3dbd9;
+				vertical-align: middle; */
+				/* width: 40%; */
+				/* float: left; */
+				/* padding-left: 15px;*/
+				padding-top: 15px;
+				/* padding-bottom: 15px;  */
+				margin-bottom: 10px !important;
+			}
+
+			.right {
+				/* background-color: #ccc;
+				display: table-cell; */
+				/* width: 60%; */
+				/* float: left; */
+				/* padding-left: 15px; */
+				padding-top: 15px;
+				padding-bottom: 15px;
+			}
+
+			.form__txt {
+				/* vertical-align: middle;
+				padding-left: 15px;
+				padding-top: 15px;
+				padding-bottom: 15px; */
+				padding-left: 5px;
+			}
+			.code_red {
+				color: #e50027;
+				padding-bottom: 15px;
+				font-size: 1em;
+				display: block;
+				text-align: right;
+				padding-left: 0;
+				padding-right: 2em;
+				line-height: 1.2em;
+			}
+
+			.finalbutton {
+				padding-top: 25px;
+				padding-bottom: 10px;
+				float: left;
+			}
+
+			.result_red {
+				color: #e50027;
+			}
+
+			.finalresult {
+				font-size: 0.95rem;
+				font-weight: bold;
+				line-height: 1.5em;
+				padding: 15px;
+				float: left;
+				width: 100%;
+				text-align: left;
+				border: 1px solid #000;
+				margin: 25px auto 25px auto;
+			}
+
+			.finalresult > .note {
+				font-size: 14px;
+				font-weight: normal;
+				text-align: left;
+				margin-top: 25px;
+			}
+
+			.note_btn {
+				width: 25px;
+				height: 25px;
+				background-color: #fff;
+				border: none;
+				margin-left: 0;
+			}
+
+			.note_btn::before {
+				content:"\f196";
+				font-family:FontAwesome;
+				width: 25px;
+				height: 25px;
+				color: #000;
+				/* background-color: #b469f1; */
+				border: none;
+			}
+
+			.note_btn.changed::before {
+				content:"\f147";
+				font-family:FontAwesome;
+				width: 25px;
+				height: 25px;
+				color: #000;
+				/* background-color: #63f8e9; */
+				border: none;
+			} 
+
+			.note_desc {
+				padding: 15px 0 0 0;
+			}
+
+			.finalresult li {
+				font-size: 16px;
+			   list-style: decimal;		               
+			   font-weight: normal;	
+               line-height: 1.5em;	
+			}
+
+			h4.note {
+				font-size: 16px;
+			}				
+
+		}
+
+		/*** 小手機 ***/
+		@media screen and (max-width: 320px) {
+	
+		}
+		
+		/*** 桌機 ***/
+		@media screen and (min-width: 481px) {
+
+			input[type="text"] {
+				/* font-size: 22px; */
+				/* padding-left: .5em; */
+				width: 100%;
+				text-indent: .5em;
+				text-align: right;
+                padding-right: .5em;
+			}
+	
+
+			.all {
+				font-size: 18px;
+				overflow: hidden;
+				/* margin-bottom: 15px; */
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+
+			.row-same-height {
+				display: table;
+				width: 100%;
+			}
+
+			.row-same-height [class^=col-] {
+				display: table-cell;
+				float: none;
+			}
+
+
+			.left {
+				/* background-color: #e3dbd9;
+				vertical-align: middle; */
+				/* width: 40%; */
+				/* float: left; */
+				/* padding-left: 15px;
+				padding-top: 15px;
+				padding-bottom: 15px; */
+			}
+
+			.right {
+				/* background-color: #ccc;
+				display: table-cell; */
+				/* width: 60%; */
+				/* float: left; */
+				/* padding-left: 15px;
+				padding-top: 15px;
+				padding-bottom: 15px; */
+			}
+
+			.form__txt {
+				/* vertical-align: middle;
+				padding-left: 15px;
+				padding-top: 15px;
+				padding-bottom: 15px; */
+			}
+			.code_red {
+				color: #e50027;
+				padding-bottom: 15px;
+				padding-right: 2em;
+				display: block;
+				text-align: right;
+			}
+
+			.finalbutton {
+				padding-top: 25px;
+				padding-bottom: 10px;
+				width: 80%;
+				margin: 0 auto;
+			}
+
+			.result_red {
+				color: #e50027;
+			}
+
+			.finalresult {
+				font-size: 23px;
+				font-weight: bold;
+				line-height: 1.7em;
+				padding: 15px;
+				float: left;
+				width: 100%;
+				text-align: left;
+				border: 1px solid #000;
+				margin: 25px auto 25px auto;
+			}
+
+			.finalresult > .note {
+				font-size: 16px;
+				font-weight: normal;
+				text-align: left;
+				line-height: 1.5em;
+			}
+
+			.note_btn {
+				width: 25px;
+				height: 25px;
+				background-color: #fff;
+				border: none;
+				margin-left: 0;
+			}
+
+			.recal {
+				width: 274px;
+				height: 46px;
+				border: none;
+			}
+
+			.trial {
+				width: 274px;
+				height: 46px;
+				border: none;
+			}
+
+
+			.note_btn::before {
+				content:"\f196";
+				font-family:FontAwesome;
+				width: 25px;
+				height: 25px;
+				color: #000;
+				/* background-color: #b469f1; */
+				border: none;
+				font-weight: bold;
+			}
+
+			.note_btn.changed::before {
+				content:"\f147";
+				font-family:FontAwesome;
+				width: 25px;
+				height: 25px;
+				color: #000;
+				/* background-color: #63f8e9; */
+				border: none;
+				font-weight: bold;
+			} 
+
+			.note_desc {
+				padding: 15px 0 0 0;
+			}
+
+			.finalresult li {
+				font-size: 16px;
+               list-style: decimal;		
+               font-weight: normal;	
+               line-height: 1.5em;	
+			}
+
+			h4.note {
+				font-size: 16px;
+			}		
+
+
+		}
+
+		/* 試算說明 */
+		.note_desc {
+			padding: 0 20px 0 0;
+		}
+		.note_desc li {
+			font-size: 16px;
+			line-height: 1.7em;
+		}	
+
+
+	  /* 延伸閱讀 */
+	  
+
+		/*** 桌機 ***/
+		@media screen and (min-width: 481px) {
+			.ext_reading {
+			  width: 100%;
+			  margin-top: 20px;
+			  float: left;
+			  background-color: #ececec;
+			  padding: 1em;
+			  margin-bottom: 15px;
+			}
+
+			.ext_reading ul {
+			}
+
+			.ext_reading ul li {
+			  list-style: disc;
+			  line-height: 2.5;
+			}
+
+			.ext_reading ul li a {
+			color: #0658aa;
+			  display: block;
+			  text-decoration: none;
+			}
+
+			.ext_reading ul li a:hover {
+			 color: #e50027;
+			}
+
+		}
+
+				/*** 手機 ***/
+				@media screen and (max-width: 480px) {
+					.ext_reading {
+						width: 100%;
+						margin-top: 20px;
+						float: left;
+						background-color: #ececec;
+						padding: 1em;
+						margin-bottom: 15px;
+					  }
+		  
+					  .ext_reading ul {
+					   /* background-color: #ececec;
+					   padding: 1em 1em 1em 0; */
+					   padding: 0;
+					  }
+		  
+					  .ext_reading ul li {
+						list-style: disc;
+						line-height: 1.8;
+						text-indent: 0em;
+						margin-left: 1em;
+						margin-bottom: 15px;
+					  }
+		  
+					  .ext_reading ul li a {
+					  color: #0658aa;
+						display: block;
+						text-decoration: none;
+					  }
+		  
+					  .ext_reading ul li a:hover {
+					   color: #e50027;
+					  }
+		  
+				}
+		
+
+

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Language" content="zh-TW">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>外幣換算</title>
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+		w[l] = w[l] || []; w[l].push({
+		  'gtm.start':
+			new Date().getTime(), event: 'gtm.js'
+		}); var f = d.getElementsByTagName(s)[0],
+		  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+			'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+	  })(window, document, 'script', 'dataLayer', 'GTM-5K535M9');</script>
+	<!-- End Google Tag Manager -->
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<!--[if lt IE 9]>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	<!-- vue -->
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+	<!-- bootstrap-select -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/css/bootstrap-select.min.css">
+
+	<!-- font-awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+	<!-- style -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+		/* select.selectpicker {
+			display: block!important;
+			width: auto!important;
+			opacity: 1!important;
+			bottom: -30px;
+			left: 0!important;
+		} */
+		.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+			width: 100%;
+		}
+
+		.Btn__exchange {
+			width: auto;
+			height: auto;
+			color: #FFF !important;
+			text-decoration: none;
+			cursor: pointer;
+			padding: 3px 16px;
+		}
+
+		.bootstrap-select.btn-group .dropdown-toggle .caret {
+		width: 20px;
+		height: 20px;
+		border: none;
+		/* font-family: 'Glyphicons Halflings'; */
+		font-family: "FontAwesome";
+	}
+
+	.bootstrap-select.btn-group .dropdown-toggle .caret:before {
+    /* background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #ddd; */
+		/* content: "\e003"; */
+		/* content: "\e114";  */
+    content: "\f078";
+		/* background-color: aqua; */
+		/* background: url(css/br_down.png) no-repeat 98%, #fff; */
+		font-size: 20px;
+		color: #3e3a39;
+	}
+
+.bootstrap-select .dropdown-toggle .caret {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    margin-top: -14px;
+    vertical-align: middle;
+}
+
+.result__note.none {
+	display: none;
+}
+
+
+	</style>
+</head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5K535M9" height="0" width="0"
+	style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+	<div id="content">
+		<div id="app">
+			<div class="container">
+
+				<!-- 標題 -->
+				<div class="exchange__head">
+					<div class=title><h2>外幣現金匯率換算</h2></div>
+				</div>
+
+				<div class="exchange">
+
+					<form action="" class="form-horizontal">
+
+						<!-- 欄位一 -->
+						<div class="select__currency">
+							<select class="selectpicker countrypicker test1" data-live-search="true" data-default="新台幣 TWD" data-flag="true" v-model="currentCountry1"></select>
+						</div>
+
+						<!-- 轉換icon -->
+						<div class="icon__exchange">兌換成</div>
+
+						<!-- 欄位二 -->
+						<div class="select__currency2">
+							<select class="selectpicker countrypicker test2" data-live-search="true" data-default="美元 USD" data-flag="true" v-model="currentCountry2">
+			
+							</select>
+							
+						</div>
+						<div class="convert btn-info" @click="changeOptions">交換幣別</div>
+
+						<!-- 輸入金額 -->
+						<div class="form__money">
+							<input class="form-control txt" type="money" placeholder="請輸入欲換算金額" id="input1" v-model.number="moneynumber">
+							<!-- 換算按鈕 -->
+							<button value="換算" type="button" 
+								class="btn btn-danger btn-lg  info Btn__exchange" id="sumbit" @click="calculate">
+									換算
+							</button>
+						</div>
+
+						
+						
+
+					</div>
+
+					<!-- 計算結果 -->
+					<div class="exchange__result" id="result">
+
+							<div class="result__title">計算結果</div>
+
+							<div class="result__money">
+									<div class="result__input">
+										<input type="text2" v-model="result"> 
+									</div>
+									<div class="result__txt">{{currentCountry2}}</div>
+						    </div>
+
+
+							<div class="result__note" :class="{'none':currentCountry1 != '新台幣 TWD' && currentCountry2 != '新台幣 TWD'}">
+									<span class="note__txt">1</span>
+									<span class="note__txt">{{currentCountry1}}</span>
+									<span class="note__txt">＝</span>
+									<span class="note__txt">{{currentExchangeRate1}}</span>
+									<span class="note__txt">{{currentCountry2}}</span>
+							</div>
+
+					</div>
+
+					<!-- 掛牌時間 -->
+					<div class="col-xs-12 col-sm-12 desc">
+							<div class="row">
+								<div class="txt__red">牌價依臺銀本日牌告匯率（非即時更新）。結果僅提供參考，實際匯率以交易當時匯率為準。</div>
+								<div class="desc__txt">資料來源：CMoney 全曜財經資訊</div>
+							</div>
+							
+					</div>		
+
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	<div class="tiken"></div>
+
+<div class="spacing-medium"></div>
+
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+
+	<!-- bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- bootstrap-select -->
+	<script src="js/bootstrap-select.js"></script>
+
+	<!-- countrypicker -->
+	<script src="js/countrypicker.js"></script>
+
+	<!-- iframeAutoHeight -->
+	<script src="https://money.udn.com/SSI/js/iframeAutoHeight.js"></script> 
+	<script>
+		var url = "https://money.udn.com/SSI/iframe_agent.html";
+		initAgent(url);
+		setInterval("callAgent(url)", 1500);
+	</script>
+
+<script>
+	var app = new Vue({
+		el:'#app',
+		data:{
+			msg:'aaaa',
+			data:[],
+			countryArray:[],
+			currentCountry1:'新台幣 TWD',
+			currentCountry2:'美元 USD',
+			defaultCurrentExchangeRate1:0,
+			defaultCurrentExchangeRate2:0,
+			currentExchangeRate1:0,
+			currentExchangeRate2:0,
+			currentExchangeRate3:0,
+			testArray:[],
+			moneynumber:'',
+			result:''
+		},
+		created: function(){
+			var vm = this;
+			var token;
+			var cors = 'https://cors-anywhere.herokuapp.com/';
+			
+			// 獲取CMoney Token(當回傳401時，重新要一次資料)
+			function getData() {
+				$.ajax({
+					'async':true,
+					'crossDomain':true,
+					'url':cors+'https://owl.cmoney.com.tw/OwlApi/api/v2/json/M3-354479b',
+					'method':'GET',
+					'dataType':'json',
+					'headers':{
+						'Authorization':'Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIyMDE4MDUxNjE3MDY1OTEyNCIsImV4cCI6MTU2Nzc0MTQwOX0.B-Y8PlkfGFyJuNyMgpRJJRtSRGzC234waaDY1yE9fOGlJTtPkVlKIBM40dhJXasVC5EWaVeWpjhm0_15G1IUKg',
+					},
+					'success':function(response) {
+						console.log(response);
+						vm.data = response.Data;			
+						var currencyLength = vm.currentCountry2.length;
+						var currency2 = vm.currentCountry2.slice(0,currencyLength-4);
+						var newArray = vm.data.filter(function(element) {
+							return element[1].indexOf(currency2) > -1;
+						});	
+						console.log(newArray);
+						vm.currentExchangeRate2 = newArray[0][9];
+						vm.currentExchangeRate1 = 1/ newArray[0][9];
+					},
+					'error':function() {
+						console.log(token);
+					}
+				});
+			}
+			getData();
+			// 先要第一次資料，若回傳401再執行getData()
+			// $.ajax({
+			// 	async:true,
+			// 	crossDomain:true,
+			// 	url:cors+'https://owl.cmoney.com.tw/OwlApi/api/v2/json/M3-354479b',
+			// 	method:'GET',
+			// 	dataType:'json',
+			// 	headers:{
+			// 		'Authorization':'Bearer'+' '+token,
+			// 	},
+			// 	success:function(response) {
+			// 		console.log(response);
+			// 	},
+			// 	// 獲取CMoney Token(當回傳401時，重新要Token)
+			// 	error:function(XMLHttpRequest, textStatus, errorThrown) {
+			// 		console.log(XMLHttpRequest.status);
+			// 		if(XMLHttpRequest.status === 401) {
+			// 			$.ajax({
+			// 				url:cors + 'http://owl.cmoney.com.tw/OwlApi/auth',
+			// 				type:'post',
+			// 				data: {
+			// 				appId:'20180516170659124',
+			// 				appSecret:'7d37674058e811e8ade5000c2932e359'
+			// 				},
+			// 				success: function(response) {
+			// 					token = response.token;
+			// 					console.log(token);
+			// 					getData();	
+			// 				},
+			// 			});
+			// 		}
+			// 	}    
+			// });					
+		},
+	
+		mounted:function() {
+			
+		},
+
+		updated:function() {
+			var roundFun = function(val,n) {
+				return Math.round(val*Math.pow(10,n))/Math.pow(10,n);
+			};
+			var vm = this;
+			var targetData;
+			// 比對符合兌換貨幣的資料
+			if (vm.currentCountry1 === '新台幣 TWD' && vm.currentCountry2 !== '新台幣 TWD') {
+				var currencyLength = vm.currentCountry2.length;
+				var currency2 = vm.currentCountry2.slice(0,currencyLength-5);
+				var newArray = vm.data.filter(function(element) {
+					return element[1].indexOf(currency2) > -1;
+				});	
+				
+				targetData = newArray[0][9];
+				vm.currentExchangeRate2 = targetData;
+				var view = 1/targetData;
+				vm.currentExchangeRate1 = parseFloat(view.toFixed(3));
+				
+			} else if(vm.currentCountry1 !== '新台幣 TWD' && vm.currentCountry2 === '新台幣 TWD') {
+				var currencyLength = vm.currentCountry1.length;
+				var currency1 = vm.currentCountry1.slice(0,currencyLength-5);
+				var newArray = vm.data.filter(function(element) {
+					return element[1].indexOf(currency1) > -1;
+				});	
+				targetData = newArray[0][10];
+				
+				vm.currentExchangeRate2 = targetData;
+				vm.currentExchangeRate1 = roundFun(targetData,3);
+			} else if(vm.currentCountry1 == vm.currentCountry2) {
+				vm.currentExchangeRate1 = 1;
+				vm.currentExchangeRate2 = 1;
+			} else if (vm.currentCountry1 !== '新台幣 TWD' && vm.currentCountry2 !== '新台幣 TWD') {
+				var currencyLength = vm.currentCountry1.length;
+				var currency1 = vm.currentCountry1.slice(0,currencyLength-5);
+				var newArray = vm.data.filter(function(element) {
+					return element[1].indexOf(currency1) > -1;
+				});	
+				targetData = newArray[0][10];
+				vm.currentExchangeRate2 = targetData;
+				var currencyLength2 = vm.currentCountry2.length;
+				var currency2 = vm.currentCountry2.slice(0,currencyLength2-5);
+				var newArray2 = vm.data.filter(function(element) {
+					return element[1].indexOf(currency2) > -1;
+				});
+				targetData2 = newArray2[0][9];
+				vm.currentExchangeRate3 = targetData2;
+			}
+			
+		},
+		// beforeUpdate:function() {
+		// 	var vm = this;
+		// 	var currencyLength = vm.currentCountry1.length;
+		// 	var currency1 = vm.currentCountry1.slice(0,currencyLength-4);
+		// 	var newArray = vm.data.filter(function(element) {
+		// 		return element[1].indexOf(currency1) > -1;
+		// 	});
+		// 	console.log(newArray);
+		// 	vm.testArray = newArray;
+		// 	vm.currentExchangeRate1 = newArray[0][9];
+		// },
+		
+		methods: {
+			calculate:function() {
+				var roundFun = function(val,n) {
+					return Math.round(val*Math.pow(10,n))/Math.pow(10,n);
+				};
+				var vm = this;
+				var result;
+				if(vm.currentCountry1 === '新台幣 TWD' && vm.currentCountry2 !== '新台幣 TWD') {
+					result = Number(vm.moneynumber / vm.currentExchangeRate2);
+					vm.result = roundFun(result,2);
+				}else if(vm.currentCountry1 !== '新台幣 TWD' && vm.currentCountry2 === '新台幣 TWD') {
+					result = Number(vm.moneynumber * vm.currentExchangeRate2);
+					vm.result = roundFun(result,2);
+				} else if (vm.currentCountry1 == vm.currentCountry2) {
+					result = Number(vm.moneynumber * vm.currentExchangeRate2);
+					vm.result = roundFun(result,2);
+				} else if (vm.currentCountry1 !== '新台幣 TWD' && vm.currentCountry2 !== '新台幣 TWD') {
+					result = Number(vm.moneynumber * vm.currentExchangeRate2);
+					var result2 = Number(result / vm.currentExchangeRate3);
+					vm.result = roundFun(result,2);
+				}		
+			},
+			changeOptions:function() {
+				var vm = this;
+				var a = vm.currentCountry1;
+				var b = vm.currentCountry2;
+				vm.currentCountry1 = b;
+				vm.currentCountry2 = a;
+				var flags1 = $('select.test1').find('option:selected').css('background-image');		
+				var flags2 = $('select.test2').find('option:selected').css('background-image');
+				var country1 = $('select.test1').find('option:selected').val();
+				var country2 = $('select.test2').find('option:selected').val();
+				$('.btn').eq(0).css('background-image',flags2);
+				$('.btn').eq(1).css('background-image',flags1);
+				$('select.test2').val(country1);
+				$('select.test1').val(country2);
+				$('select').selectpicker('refresh');
+				vm.result = '';
+			},
+			formatPrice(value) {
+				var val = (value/1).toFixed(0).replace(',', ',')
+				return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+		},
+		// mounted:function() {
+		// 	function startTime() {
+		// 		var today = new Date();
+		// 		var date = today.getDate();
+		// 		var h = today.getHours();
+		// 		var m = today.getMinutes();
+		// 		var s = today.getSeconds();
+				
+		// 		m = checkTime(m);
+		// 		s = checkTime(s);
+		// 		$('#txt').html(date + ':' + h + ":" + m + ":" + s); 
+		// 		if (date + ':' + h + ":" + m + ":" + s >= '4:15:05:50') {
+		// 			$('#txt').remove();
+		// 		}
+		// 		var t = setTimeout(startTime, 500);
+		// 	}
+		// 	function checkTime(i) {
+		// 		if (i < 10) {
+		// 			i = "0" + i
+		// 		};  // add zero in front of numbers < 10
+		// 		return i;
+		// 		console.log(i);
+		// 	}
+		// 	startTime();
+
+			
+			
+		// }
+	});
+</script>
+
+</body>
+</html>
+
